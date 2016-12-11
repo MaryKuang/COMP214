@@ -1,0 +1,134 @@
+﻿body {
+    color:#574c3f;
+    font-family: 'HelveticaRegular',Helvetica,Arial;
+    font-size: 12px;
+   background-color:lavender;
+   
+}
+
+.wrapper{
+    width:975px;
+    margin-left:auto;
+    margin-right:auto;
+    padding-bottom:20px;
+    background-color:white;
+
+    border-radius:25px;
+    -moz-border-radius:25px;
+    -webkit-border-radius:25px;
+
+    overflow:hidden;
+}
+
+.banner{
+   
+}
+
+.navigation{
+    height:45px;
+    background:linear-gradient(to top,#c2bcb5,#ffffff);
+    width:100%;
+    margin: 0px 0px 10px;
+    padding:0px;
+  
+    border-radius:5px 5px 5px 5px;
+}
+
+#nav{
+    display:block;
+    list-style:none;
+    text-align:center;
+}
+
+#nav ul{
+   
+    display:none;
+    list-style:none;
+    
+}
+
+#nav li{
+    display:block;
+    float:left;
+    margin-top:15px;
+    text-transform:uppercase;
+    padding:0px 20px 0px 20px;
+    border-left:1px solid #ffffff;
+}
+
+#nav a:link, #nav a:visited,#nav a:active{
+    display:block;
+    color:#574c3f;
+    text-decoration:none;
+}
+
+#nav a:hover {
+    background-color: white;
+}
+
+
+
+.content{
+    width:900px;
+    padding: 10px;
+    min-height: 400px;
+    margin:20px 10px 20px 10px;
+    text-align:left;
+   line-height:1.5;
+}
+
+
+.footer{
+    clear:both;
+    height:60px;
+    margin:auto;
+    background:linear-gradient(to top,#c2bcb5,#ffffff);
+    text-align:center;
+}
+
+.label {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	font-weight: bold;
+	text-align: left;
+	vertical-align: top;
+     display:block;
+     padding:7px;
+}
+
+.textBox{
+     text-align:left;
+     display:block;
+      border-radius: 4px;
+      padding: 7px;
+     width: 100%;
+     box-sizing: border-box; 
+     margin-bottom: 7px;
+   
+    
+}
+.btn{
+    display: inline-block;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 12px;
+	padding: 10px 30px;
+    margin:30px 10px 10px 10px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid rgba(0,0,0,0.3);
+	border-bottom-width: 3px;
+}
+
+.btn:hover {
+		background-color: #e3e3e3;
+		border-color: rgba(0,0,0,0.5);
+	}
+	
+.btn:active {
+		background-color: #CCC;
+		border-color: rgba(0,0,0,0.9);
+	}
+
+
