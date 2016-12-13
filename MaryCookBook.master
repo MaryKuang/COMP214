@@ -1,4 +1,6 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MaryCookBook.master.cs" Inherits="MaryCookBook" %>
+﻿<%--Yu Kuang 300540907--%>
+
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MaryCookBook.master.cs" Inherits="MaryCookBook" %>
 
 <!DOCTYPE html>
 
@@ -32,7 +34,9 @@
                   <li><asp:HyperLink ID="hylRecipe" runat="server" NavigateUrl="~/Recipes.aspx">Recipes</asp:HyperLink></li>
                   <li><asp:HyperLink ID="hylAdd" runat="server" NavigateUrl="~/AddRecipe.aspx">Add Recipe</asp:HyperLink></li>
                   <li><asp:HyperLink ID="hylSearch" runat="server" NavigateUrl="~/Search.aspx">Search</asp:HyperLink></li>
-                  <li><asp:HyperLink ID="hylSiteMap" runat="server" NavigateUrl="~/SignUp.aspx">SignUp</asp:HyperLink></li>
+                  <li><asp:HyperLink ID="hylSignUp" runat="server" NavigateUrl="~/SignUp.aspx">SignUp</asp:HyperLink></li>
+                  <li><asp:HyperLink ID="hylLogin" runat="server" NavigateUrl="~/Login.aspx">Login</asp:HyperLink></li>
+
                </ul>
             </div>
             <div>

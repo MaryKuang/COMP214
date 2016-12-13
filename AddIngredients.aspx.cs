@@ -1,4 +1,6 @@
-﻿using System;
+﻿/* Yu Kuang 300540907 */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,7 +21,8 @@ public partial class AddIngredients : System.Web.UI.Page
     {
        if(!Page.IsPostBack) { 
         string aIngredientValue = A_Ingredient.ingredientValue;
-      //  key=Request.QueryString["key"];
+            //  key=Request.QueryString["key"];
+           // BindList();
         }
 
     }
@@ -32,11 +35,11 @@ public partial class AddIngredients : System.Web.UI.Page
     protected void btnAdd_Click(object sender, EventArgs e)
     {
         
-            GridView1.Visible = true;
+        GridView1.Visible = true;
         string aIngredientValue = A_Ingredient.ingredientValue;
         conn.ConnectionString = connectionString;
         OracleCommand comm = conn.CreateCommand();
-        comm.CommandText = "Insert into recipeandIngredient values(bridgeid.nextval,:recipeID,:ingredient,:quantity,:unite)";
+        comm.CommandText = "Insert into recipeandIngredient values(bridgeid.nextval,:recipeID,:ingredient,:quantity,:unit)";
         comm.CommandType = CommandType.Text;
         comm.Parameters.Add(":recipeID", OracleDbType.Varchar2, ParameterDirection.Input);
         comm.Parameters[":recipeid"].Value = Request.QueryString["key"];
@@ -70,8 +73,8 @@ public partial class AddIngredients : System.Web.UI.Page
             comm.Connection.Close();
         }
 
-       // GridView1.DataSource = ds;
-        GridView1.DataBind();
+      //  GridView1.DataSource = ds;
+     //    GridView1.DataBind();
 
         txtQuantity.Text = "";
         txtUnit.Text = "";
@@ -80,55 +83,82 @@ public partial class AddIngredients : System.Web.UI.Page
 
     }
 
-    //protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
-    //{
-    //    GridView1.EditIndex = e.NewEditIndex;
+    protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        GridView1.EditIndex = e.NewEditIndex;
 
+        BindList();
+    }
+
+    //protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    //{
+    //    GridViewRow row = GridView1.Rows[e.RowIndex];
+    //    Label ID = (Label)row.FindControl("ingredientid");
+    //    //     TextBox updateIngre = (TextBox)row.FindControl("ingredientid");
+    //    TextBox updateQuan = (TextBox)row.FindControl("Quantity");
+    //    TextBox updateUnit = (TextBox)row.FindControl("Unit");
+    //    int ingeridentID = int.Parse(ID.Text);
+    //    string quantity = updateQuan.Text;
+    //    string measure = updateUnit.Text;
+
+    //    string connectionString =
+    //         ConfigurationManager.ConnectionStrings["ConnectionString2"].ConnectionString;
+    //    OracleConnection conn = new OracleConnection();
+    //    conn.ConnectionString = connectionString;
+    //    OracleCommand comm = conn.CreateCommand();
+    //    try
+    //    {
+    //        comm.Connection.Open();
+    //        comm.CommandType = CommandType.Text;
+
+    //        comm.CommandType = CommandType.Text;
+    //        comm.CommandText = "update ingredients set name ='quantity=" + quantity + ", unitofmeasure= '" + measure + "' where ingredientid = " + ingeridentID;
+    //        comm.ExecuteNonQuery();
+    //        GridView1.EditIndex = -1;
+    //    }
+
+    //    catch
+    //    {
+
+    //    }
+
+    //    finally
+    //    {
+    //        comm.Connection.Close();
+    //    }
     //  //  BindList();
     //}
 
-   // protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
-   // {
-   //     GridViewRow row = GridView1.Rows[e.RowIndex];
-   //     Label ID = (Label)row.FindControl("ingredientid");
-   ////     TextBox updateIngre = (TextBox)row.FindControl("ingredientid");
-   //     TextBox updateQuan = (TextBox)row.FindControl("Quantity");
-   //     TextBox updateUnit = (TextBox)row.FindControl("Unit");
-   //     int ingeridentID = int.Parse(ID.Text);
-   //     string quantity = updateQuan.Text;
-   //     string measure = updateUnit.Text;
+    protected void BindList()
+    {
+        conn.ConnectionString = connectionString;
+        OracleCommand comm = conn.CreateCommand();
+        comm.CommandText = "Select * from recipeandIngredient";
+        comm.CommandType = CommandType.Text;
+        DataSet ds;
 
-   //     string connectionString =
-   //          ConfigurationManager.ConnectionStrings["ConnectionString2"].ConnectionString;
-   //     OracleConnection conn = new OracleConnection();
-   //     conn.ConnectionString = connectionString;
-   //     OracleCommand comm = conn.CreateCommand();
-   //     try
-   //     {
-   //         comm.Connection.Open();
-   //         comm.CommandType = CommandType.Text;
+        try
+        {
+            comm.Connection.Open();
+            comm.ExecuteNonQuery();
 
-   //         comm.CommandType = CommandType.Text;
-   //         comm.CommandText = "update ingredients set name ='quantity=" + quantity + ", unitofmeasure= '" + measure + "' where ingredientid = " + ingeridentID;
-   //         comm.ExecuteNonQuery();
-   //         GridView1.EditIndex = -1;
-   //     }
+            OracleDataAdapter myDB = new OracleDataAdapter(comm);
+            myDB.SelectCommand = comm;
+            ds = new DataSet();
+            myDB.Fill(ds);
+        }
+        catch
+        {
 
-   //     catch ()
-   //     {
-           
-   //     }
+            throw;
+        }
+        finally
+        {
+            comm.Connection.Close();
+        }
 
-   //     finally
-   //     {
-   //         comm.Connection.Close();
-   //     }
-   //     BindList();
-   // }
-
-   // protected void BindList()
-   // {
-
-   // }
+        GridView1.DataSource = ds;
+      //  GridView1.DataBind();
+    }
 
 }

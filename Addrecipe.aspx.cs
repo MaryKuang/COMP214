@@ -1,4 +1,6 @@
-﻿using System;
+﻿/* Yu Kuang 300540907 */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -98,19 +100,13 @@ public partial class Addrecipe : ThemePage
             _InParam5.ParameterName = "RECID";
             _InParam5.OracleDbType = OracleDbType.Decimal;                ;
             _InParam5.Direction = ParameterDirection.Output;
- //           _InParam4.Value = tbxDescription.Text;
+ 
             comm.Parameters.Add(_InParam5);
 
             comm.ExecuteNonQuery();
-           key =Convert.ToString(_InParam5.Value);
+            key =Convert.ToString(_InParam5.Value);
           
-//            comm.Connection.Open();
-//            comm.ExecuteNonQuery();
 
- //           OracleDataAdapter myDB = new OracleDataAdapter(comm);
- //           myDB.SelectCommand = comm;
-//            ds = new DataSet();
- //           myDB.Fill(ds);
              comm.Connection.Close();
             comm.Connection.Dispose();
             comm = null;
@@ -218,7 +214,7 @@ public partial class Addrecipe : ThemePage
         tbxServings.Text = "";
         tbxDescription.Text = "";
 
-    //    Response.Redirect("AddIngredients.aspx");
+      // Response.Redirect("AddIngredients.aspx");
         Response.Redirect("AddIngredients.aspx?key="+ key);
        
     }

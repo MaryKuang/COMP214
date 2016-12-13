@@ -10,8 +10,9 @@ using System.Data;
 
 public partial class DetailRecipe : ThemePage
 {
-  //  string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-  //  OracleConnection conn = new OracleConnection();
+    string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+    OracleConnection conn = new OracleConnection();
+
     string _connstring = "Data Source=oracle1.centennialcollege.ca:1521/SQLD;User ID=COMP214F16_001_P_17;Password=password";
 
    
@@ -35,11 +36,7 @@ public partial class DetailRecipe : ThemePage
             try
         {
 
- //          _sql = " select * from recipes where recipeid = :IDVALUE ";
- //               _sql = " select * from recipes where  to_number(:IDVALUE) = recipeid ";
- //                     _sql = " select * from recipes ";
-
-                //               OracleConnection conn = new OracleConnection();
+ 
                 OracleConnection conn = new OracleConnection(_connstring);
                 conn.Open();
                 DataSet _ds = new DataSet();
@@ -47,38 +44,9 @@ public partial class DetailRecipe : ThemePage
                 comm.CommandType = CommandType.Text;
                 comm.CommandText = "select recipeid,recipename,userid,categoryid,cookingtime,servingtime,description from recipes_VIEW where recipeid=" + Request.QueryString["param"];
 
-                //             comm.CommandType = CommandType.Text;
-                //             comm.BindByName = true;
-                //           OracleDataAdapter myDB = new OracleDataAdapter(_sql, conn);
-
-                //        comm.Connection.Open();
-                //           comm.Parameters.Clear();
-                //           comm.Parameters.Add(new OracleParameter(":IDVALUE", Request.QueryString["param"]));
-
-                /*                    OracleParameter _idParam = comm.CreateParameter();
-                                     _idParam.ParameterName = "IDVALUE";
-                                     _idParam.OracleDbType = OracleDbType.Decimal;
-                  //                   _idParam.Value = 1023;
-                                        _idParam.Value = Request.QueryString["param"];
-                           comm.Parameters.Add(_idParam);
-           */
+         
                 OracleDataAdapter myDB = new OracleDataAdapter(comm);
-  //              _rdrObj = comm.ExecuteReader();
-   //             table.Load(_rdrObj);
-
-                /*     _recordsAffected = comm.ExecuteNonQuery();
-                _rdrObj = comm.ExecuteReader();
-                        if (_rdrObj.HasRows)
-                {
-                            if (_rdrObj.Read())
-                            {
-                                numRECIPEID = _rdrObj.GetDecimal(_rdrObj.GetOrdinal("RECIPEID"));
-                                txtName = _rdrObj.GetString(_rdrObj.GetOrdinal("RECIPENAME"));
-                                txtRemarks = _rdrObj.GetString(_rdrObj.GetOrdinal("DESCRIPTION"));
-                              
-                            }
-                        }
-                */
+  
                ds = new DataSet();
               myDB.Fill(ds);
                 conn.Close();
@@ -100,6 +68,7 @@ public partial class DetailRecipe : ThemePage
              //   conn.Dispose();
               //  conn = null;
         }
+      //  BindView();
 
     }
 //    protected void btnDetailIngredients_Click(object sender, EventArgs e)
@@ -115,70 +84,6 @@ public partial class DetailRecipe : ThemePage
 //          });   */
 
 
-//        string _connstring = "Data Source=oracle1.centennialcollege.ca:1521/SQLD;User ID=COMP214F16_001_P_17;Password=password";
-
-//        DataSet ds;
-
-//        try
-//        {
-//            OracleConnection conn = new OracleConnection(_connstring);
-//            conn.Open();
-//            OracleCommand comm = conn.CreateCommand();
-//            comm.CommandText = "Recipe_update";
-//            comm.CommandType = CommandType.StoredProcedure;
-
-//            OracleParameter _InParam1 = new OracleParameter();
-//            _InParam1.ParameterName = "recipename1";
-//            _InParam1.OracleDbType = OracleDbType.Varchar2;
-//            _InParam1.Direction = ParameterDirection.Input;
-//            //            _InParam1.Value = tbxRecipeName.Text;
-//             //    _InParam1.Value = (TextBox)DetailsViewDetail.FindControl("editRecipename");
-//               _InParam1.Value = "2222";
-//            comm.Parameters.Add(_InParam1);
-
-//            OracleParameter _InParam2 = new OracleParameter();
-//            _InParam2.ParameterName = "cookingtime1";
-//            _InParam2.OracleDbType = OracleDbType.Varchar2;
-//            _InParam2.Direction = ParameterDirection.Input;
-//              comm.Parameters.Add(_InParam2);
-
-//            OracleParameter _InParam3 = new OracleParameter();
-//            _InParam3.ParameterName = "SERVINGNUMBER1";
-//            _InParam3.OracleDbType = OracleDbType.Varchar2;
-//            _InParam3.Direction = ParameterDirection.Input;
-//               comm.Parameters.Add(_InParam3);
-
-//            OracleParameter _InParam4 = new OracleParameter();
-//            _InParam4.ParameterName = "DES1";
-//            _InParam4.OracleDbType = OracleDbType.Varchar2;
-//            _InParam4.Direction = ParameterDirection.Input;
-//            comm.Parameters.Add(_InParam4);
-
-//            comm.ExecuteNonQuery();
-
-//            comm.Connection.Close();
-//            comm.Connection.Dispose();
-//            comm = null;
-//        }
-//        catch (Exception ex)
-//        {
-//            Console.WriteLine("SQL error" + ex.Message);
-//            throw new Exception("Err in running" + ex.Message);
-//        }
-//        finally
-//        {
-//            //          comm.Connection.Close();
-//        } */
-
-// //       tbxRecipeName.Text = "";
-//  //      tbxSubmit.Text = "";
-// //       tbxPrepare.Text = "";
-////        tbxServings.Text = "";
-//  //      tbxDescription.Text = "";
-
-//        Response.Redirect("Recipes.aspx");
-//    } 
-
     protected void btnDetailIngredients_Click(object sender, EventArgs e)
     {
         string _connstring = "Data Source=oracle1.centennialcollege.ca:1521/SQLD;User ID=COMP214F16_001_P_17;Password=password";
@@ -188,7 +93,7 @@ public partial class DetailRecipe : ThemePage
         comm.CommandType = CommandType.Text;
         comm.CommandText = "select recipeid,ingredientid,quantity,unit from recipeandingredient where recipeid=" + Request.QueryString["param"];
         DataSet ds;
-        string _sql;
+      //  string _sql;
             try
         {
             comm.Connection.Open();
@@ -204,8 +109,8 @@ public partial class DetailRecipe : ThemePage
         {
             comm.Connection.Close();
         }
-        DetailsView2.DataSource = ds;
-        DetailsView2.DataBind();
+        GridView1.DataSource = ds;
+        GridView1.DataBind();
 
 
 
@@ -249,11 +154,6 @@ public partial class DetailRecipe : ThemePage
     {
         Response.Redirect("~/Recipes.aspx");
     }
-
-
-
-
-
 
 
     protected void DetailsView1_ModeChanging(object sender, DetailsViewModeEventArgs e)
@@ -368,7 +268,7 @@ public partial class DetailRecipe : ThemePage
             _InParam6.ParameterName = "ID1";
             _InParam6.OracleDbType = OracleDbType.Varchar2;
             _InParam6.Direction = ParameterDirection.Input;
-            _InParam6.Value = "3003";
+            _InParam6.Value = Request.QueryString["param"];
             comm.Parameters.Add(_InParam6);
 
 
@@ -389,6 +289,170 @@ public partial class DetailRecipe : ThemePage
         }
 
         Response.Redirect("~/Recipes.aspx");
+
+
+    }
+
+    protected void GridView1_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+    {
+
+    }
+
+    //protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+    //{
+    //    GridView1.EditIndex = e.NewEditIndex;
+    //    BindView();
+    //}
+
+    protected void BindView()
+    { 
+        conn.ConnectionString = connectionString;
+    OracleCommand comm = conn.CreateCommand();
+    comm.CommandType = CommandType.Text;
+        comm.CommandText = "select * from recipeandingredient where recipeid="+ Request.QueryString["param"];
+        DataSet ds;
+        try
+        {
+            comm.Connection.Open();
+            OracleDataAdapter myDB = new OracleDataAdapter(comm);
+           ds = new DataSet();
+           myDB.Fill(ds);
+        }
+        catch 
+        {
+            throw;
+        }
+        finally
+        {
+            comm.Connection.Close();
+        }
+        GridView1.DataSource = ds;
+        GridView1.DataBind();
+
+    }
+
+
+    protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        GridViewRow row = GridView1.Rows[e.RowIndex];
+         Label Id = (Label)row.FindControl("ingredientID");
+      //  TextBox updateIngreID = (TextBox)row.FindControl("ingredientID");
+        TextBox updateQuan = (TextBox)row.FindControl("Quantity");
+        TextBox UpdateUnit = (TextBox)row.FindControl("Unit");
+        int ingerID = Convert.ToInt32(Id.Text);
+        string quan = updateQuan.Text;
+        string measure = UpdateUnit.Text;
+
+        try
+        {
+            OracleConnection conn = new OracleConnection(_connstring);
+            conn.Open();
+            OracleCommand comm = conn.CreateCommand();
+            comm.CommandText = "bridge_update2";
+            comm.CommandType = CommandType.StoredProcedure;
+
+            OracleParameter _InParam1 = new OracleParameter();
+            _InParam1.ParameterName = "ingredientID1";
+            _InParam1.OracleDbType = OracleDbType.Varchar2;
+            _InParam1.Direction = ParameterDirection.Input;
+            //            _InParam1.Value = tbxRecipeName.Text;
+            //    _InParam1.Value = (TextBox)DetailsViewDetail.FindControl("editRecipename");
+            _InParam1.Value = ingerID;
+            comm.Parameters.Add(_InParam1);
+
+            OracleParameter _InParam2 = new OracleParameter();
+            _InParam2.ParameterName = "Quantity1";
+            _InParam2.OracleDbType = OracleDbType.Varchar2;
+            _InParam2.Direction = ParameterDirection.Input;
+            _InParam2.Value = quan;
+            comm.Parameters.Add(_InParam2);
+
+            OracleParameter _InParam3 = new OracleParameter();
+            _InParam3.ParameterName = "Unit1";
+            _InParam3.OracleDbType = OracleDbType.Varchar2;
+            _InParam3.Direction = ParameterDirection.Input;
+            _InParam3.Value = measure;
+            comm.Parameters.Add(_InParam3);
+
+
+            OracleParameter _InParam4 = new OracleParameter();
+            _InParam4.ParameterName = "recipeID1";
+            _InParam4.OracleDbType = OracleDbType.Varchar2;
+            _InParam4.Direction = ParameterDirection.Input;
+            _InParam4.Value = Request.QueryString["param"];
+            comm.Parameters.Add(_InParam4);
+
+            comm.ExecuteNonQuery();
+
+            comm.Connection.Close();
+            comm.Connection.Dispose();
+            comm = null;
+        }
+
+
+        catch
+        {
+            throw;
+          }
+
+        finally
+        {
+           
+        }
+      
+       
+    }
+
+    protected void GridView1_RowEditing1(object sender, GridViewEditEventArgs e)
+    {
+
+        GridView1.EditIndex = e.NewEditIndex;
+        BindView();
+
+    }
+
+    protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+         
+        GridView1.EditIndex = -1;
+        BindView();
+   
+}
+
+    protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        GridViewRow row = GridView1.Rows[e.RowIndex];
+        Label Id = (Label)row.FindControl("ingredientID");
+
+        conn.ConnectionString = connectionString;
+        OracleCommand comm = conn.CreateCommand();
+        comm.CommandText = "delete from recipeandingredient where ingredientID="+Id;
+        comm.CommandType = CommandType.Text;
+        DataSet ds;
+
+        try
+        {
+            comm.Connection.Open();
+           comm.ExecuteNonQuery();
+
+        //    OracleDataAdapter myDB = new OracleDataAdapter(comm);
+         //   myDB.SelectCommand = comm;
+         //   ds = new DataSet();
+          //  myDB.Fill(ds);
+        }
+        catch
+        {
+
+            throw;
+        }
+        finally
+        {
+            comm.Connection.Close();
+        }
+
+
+      //  GridView1.DataSource = ds;
+        GridView1.DataBind();
 
 
     }

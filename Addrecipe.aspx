@@ -5,7 +5,7 @@
 <%@ Register Src="~/UserControls/A_Ingredient.ascx" TagPrefix="uc1" TagName="A_Ingredient" %>
 <%@ Register Src="~/UserControls/IngredientList.ascx" TagPrefix="uc1" TagName="IngredientList" %>
 
-
+<%--Yu Kuang 300540907--%>
 
 
 
@@ -13,6 +13,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="content">
+
+         <div class="form-group row">
+    <asp:Label ID="lblCategory" runat="server" class="col-sm-2" Text="Category:"></asp:Label>
+          <div class="col-sm-10">
+              <uc1:Categories runat="server" ID="Categories" />
+          </div>
+         </div>
    <div class="form-group row">
      <asp:Label ID="lblRecipeName" runat="server" class="col-sm-2" Text="Name of Recipe:"></asp:Label>
      <div class="col-sm-10">
@@ -29,12 +36,7 @@
           </div> 
          </div>
     
-     <div class="form-group row">
-    <asp:Label ID="lblCategory" runat="server" class="col-sm-2" Text="Category:"></asp:Label>
-          <div class="col-sm-10">
-              <uc1:Categories runat="server" ID="Categories" />
-          </div>
-         </div>
+    
     
      <div class="form-group row">
      <asp:Label ID="lblPrepare" runat="server" class="col-lg-2" Text="Prepare time:"></asp:Label>
